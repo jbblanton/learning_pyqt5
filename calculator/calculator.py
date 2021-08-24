@@ -3,6 +3,9 @@
 '''A simple calculator made with PyQt5
       Using the M-V-C approach '''
 
+# Guide:  https://realpython.com/python-pyqt-gui-calculator/
+
+
 import sys
 
 from PyQt5.QtCore import Qt
@@ -13,6 +16,9 @@ from PyQt5.QtWidgets import (QApplication,
                               QLineEdit, 
                               QPushButton, 
                               QVBoxLayout)
+
+from calc_work import *
+from calc_math import *
 
 
 class CalculatorUI(QMainWindow):
@@ -102,6 +108,11 @@ def main():
 
   # Show it
   view.show()
+
+  model = evaluateExpression
+  CalculatorWork(model=model, view=view)  
+  # Pass the ability to do math and the calculator gui to the controller
+
   sys.exit(calc.exec_())
 
 
