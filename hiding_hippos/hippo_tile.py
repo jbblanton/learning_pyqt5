@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 
 
 IMG_FLAG = QImage('./images/grass.png')
-IMG_HIPPO = QImage('./images/happy_hippo.png')
+IMG_HIPPO = QImage('./images/hippo.png')
 IMG_START = QImage('./images/red_alien.png')
 IMG_TIME = QImage('./images/hourglass.png')
 
@@ -56,7 +56,7 @@ class Tile(QWidget):
 
   def paintEvent(self, event):
     ''' Tiles are shown as a start position, hippo, or empty '''
-    print('painted tiles')
+
     p = QPainter(self)
     p.setRenderHint(QPainter.Antialiasing)
 
@@ -69,6 +69,7 @@ class Tile(QWidget):
       outer, inner = Qt.gray, Qt.lightGray
 
     p.fillRect(r, QBrush(inner))
+    #pen = QPen(Qt.black, 2, Qt.SolidLine)
     pen = QPen(outer)
     pen.setWidth(1)
     p.setPen(pen)
@@ -88,6 +89,7 @@ class Tile(QWidget):
         f.setBold(True)
         p.setFont(f)
         p.drawText(r, Qt.AlignHCenter | Qt.AlignVCenter, str(self.adjacent_n))
+
     elif self.is_flagged:
       p.drawPixmap(r, QPixmap(IMG_FLAG))
     

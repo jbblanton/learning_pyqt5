@@ -18,9 +18,9 @@ import time
 
 # Easy, Med, Hard: dimension squared, # of hippos
 LEVELS = [
-  (8, 10),
-  (16, 40),
-  (24, 99)
+  ('Easy', 8, 10),
+  ('Medium', 16, 40),
+  ('Hard', 24, 99)
 ]
 
 STATUS_READY = 0
@@ -41,10 +41,16 @@ class MainWindow(QMainWindow):
   def __init__(self, *args, **kwargs):
     super(MainWindow, self).__init__(*args, **kwargs)
     
-    self.board_size, self.num_hippos = LEVELS[0]
+    self.setWindowTitle('Hiding Hippos')
+    #self.setFixedSize(300,320)
 
     w = QWidget()
     hb = QHBoxLayout()
+
+    self._createMenu()
+
+    # Default to easy level
+    self.level_name, self.board_size, self.num_hippos = LEVELS[2]
 
     # Track the numbers of hidden hippos
     self.hippos = QLabel()
@@ -78,7 +84,7 @@ class MainWindow(QMainWindow):
 
     # Icon for remaining hippos
     hippos = QLabel()
-    hippo_pix = QPixmap.fromImage(IMG_HIPPO).scaledToHeight(55)
+    hippo_pix = QPixmap.fromImage(IMG_HIPPO).scaledToHeight(35)
     hippos.setPixmap(hippo_pix)
     hippos.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
 
@@ -91,7 +97,7 @@ class MainWindow(QMainWindow):
 
     # Icon for time since start
     timer = QLabel()
-    timer_pix = QPixmap.fromImage(IMG_TIME).scaledToHeight(38)
+    timer_pix = QPixmap.fromImage(IMG_TIME).scaledToHeight(30)
     timer.setPixmap(timer_pix)
     timer.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
     hb.addWidget(timer)
@@ -100,7 +106,7 @@ class MainWindow(QMainWindow):
     vb.addLayout(hb)
 
     self.grid = QGridLayout()
-    self.grid.setSpacing(5)
+    self.grid.setSpacing(2) # orig: 5
 
     vb.addLayout(self.grid)
     w.setLayout(vb)
@@ -114,9 +120,23 @@ class MainWindow(QMainWindow):
 
     self.show()
 
+# TODO: add a restart/new game option
+  def _createMenu(self):
+    self.menu = self.menuBar().addMenu('&Menu')
+    self.menu.addAction('&New game', self.reset_map)
+    self.level_menu = self.menu.addMenu('Choose difficulty')
+    self.level_menu.addAction('&Easy', self.setEasy)
+    self.level_menu.addAction('&Medium', self.setMed)
+    self.level_menu.addAction('&Hard', self.setHard)
+    self.menu.addSeparator()
+    self.menu.addAction('&Quit', self.close)
+
 
   def init_map(self):
     '''Add positions to a game board '''
+
+    # Default to easy level
+    #self.level_name, self.board_size, self.num_hippos = LEVELS[0]
 
     for x in range(0, self.board_size):
       for y in range(0, self.board_size):
@@ -130,6 +150,18 @@ class MainWindow(QMainWindow):
 
     # The singleShot timer is required to ensure the resize runs after we've returned to the event loop and Qt is aware of the new contents.
     # QTimer.singleShot(0, lambda: self.resize(1,1))
+
+  def setLevel(self, level=0):
+    print(level)
+    self.level_name, self.board_size, self.num_hippos = LEVELS[level]
+
+    #self.setWindowTitle('Hiding Hippos - %s' % (self.level_name))
+    self.hippos.setText('%03d' % self.num_hippos)
+
+    
+    self.reset_map()
+    # self.init_map()
+    # self.update()
 
 
   def reset_map(self):
@@ -211,7 +243,7 @@ class MainWindow(QMainWindow):
       n_secs = int(time.time()) - self.timer_start_nsecs
       self.clock.setText('%03d' % n_secs)
 
-
+# TODO: This wraps around; needs fixing
   def get_surrounding(self, x, y):
     ''' Check the 3x3 space around a clicked Tile 
             Return a list of surrounding Tile widgets
@@ -277,15 +309,17 @@ class MainWindow(QMainWindow):
     self.update_status(STATUS_SUCCESS)
 
 
-# def setLevel(self, level):
-#   self.level_name, self.board_size, self.num_hippos = LEVELS[level]
+  def setEasy(self):
+    self.setLevel(0)
 
-#   self.setWindowTitle('Hiding Hippos - %s' % (self.level_name))
-#   self.hippos.setText('%03d' % self.num_hippos)
+  def setMed(self):
+    self.setLevel(1)  
 
-#   self.clear_map()
-#   self.init_map()
-#   self.reset_map()
+  def setHard(self):
+    self.setLevel(2)
+
+       
+    
 
 
 if __name__ == '__main__':
