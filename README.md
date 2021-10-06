@@ -7,3 +7,5 @@
 - The branch 'personalize' goes beyond the tutorial to add styling
 
 /hiding_hippos is a Minesweeper-style game, where you are avoiding hippos instead of bombs!
+
+/trivia_game is a multiple-choice game that tests one's knowledge of Computer Science
