@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: 
+      - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  increment_version:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Git Semantic Version
+        uses: PaulHatch/semantic-version@v5.0.0-alpha2 
+        with:
+          # The prefix to use to identify tags
+          tag_prefix: "v"
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: "(MAJOR)"
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: "(MINOR)"
+          # A string to determine the format of the version output
+          format: "${major}.${minor}.${patch}-prerelease${increment}"
+          # If this is set to true, *every* commit will be treated as a new version.
+          bump_each_commit: false
+          # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
+          search_commit_body: false
+          # The output method used to generate list of users, 'csv' or 'json'.
+          user_format_type: "json"
