@@ -52,5 +52,16 @@ jobs:
       - name: Update version
         uses: brettdorrans/write-version-to-file@master
         with:
-          filename: "latest_version.VERSION"
+          filename: "/latest_version.VERSION"
+          placeholder: "${VERSION}"
+
+  write-version2:
+    runs-on: ubuntu-latest
+    name: Write Version to File 2
+    steps:
+      - uses: actions/checkout@master
+      - name: Update version 2
+        uses: brettdorrans/write-version-to-file@master
+        with:
+          filename: "/latest_version.txt"
           placeholder: "${VERSION}"
