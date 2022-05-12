@@ -44,18 +44,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-  cat-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: "Get version"
-        id: vars
-        run: echo ::set-output name=version::$(cat VERSION)
-      - name: "Test output"
-        run: echo ${{ steps.vars.outputs.version }}
-
   write-version:
     runs-on: ubuntu-latest
     name: Write Version to File
@@ -77,3 +65,5 @@ jobs:
         with:
           filename: "./latest_version.txt"
           placeholder: "${VERSION}"
+        run: echo ${VERSION} >> ./latest_version.txt
+          cat ./latest_version.txt
