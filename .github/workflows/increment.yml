@@ -43,10 +43,10 @@ jobs:
           title: ${{ steps.semvers.outputs.patch }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Get version
+      - name: "Get version"
         id: vars
         run: echo ::set-output name=version::$(cat VERSION)
-      - name: Test output
+      - name: "Test output"
         run: echo ${{ steps.vars.outputs.version }}
 
   write-version:
