@@ -52,7 +52,7 @@ jobs:
       - name: Update version
         uses: brettdorrans/write-version-to-file@master
         with:
-          filename: "/latest_version.VERSION"
+          filename: "../latest_version.VERSION"
           placeholder: "${VERSION}"
 
   write-version2:
@@ -63,5 +63,5 @@ jobs:
       - name: Update version 2
         uses: brettdorrans/write-version-to-file@master
         with:
-          filename: "/latest_version.txt"
+          filename: "./latest_version.txt"
           placeholder: "${VERSION}"
