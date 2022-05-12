@@ -43,6 +43,11 @@ jobs:
           title: ${{ steps.semvers.outputs.patch }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Get version
+        id: vars
+        run: echo ::set-output name=version::$(cat VERSION)
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.version }}
 
   write-version:
     runs-on: ubuntu-latest
@@ -53,7 +58,7 @@ jobs:
         uses: brettdorrans/write-version-to-file@master
         with:
           filename: "./latest_version.VERSION"
-          placeholder: "${VERSION}"
+          placeholder: "${{ generate.steps.previoustag }}"
 
   write-version2:
     runs-on: ubuntu-latest
