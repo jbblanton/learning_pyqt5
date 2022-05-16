@@ -53,7 +53,7 @@ jobs:
         uses: brettdorrans/write-version-to-file@master
         with:
           filename: "./latest_version.txt"
-          placeholder: ${VERSION}
+          placeholder: ${{ steps.tag_version.outputs.new_tag }}
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
