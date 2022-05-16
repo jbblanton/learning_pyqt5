@@ -57,41 +57,24 @@ jobs:
 
   write-version3:
     runs-on: ubuntu-latest
-    name: Write Version to File 3
+    name: Writing?
     steps:
-      - uses: actions/checkout@master
-      - name: Update version 2
-        uses: brettdorrans/write-version-to-file@master
+      - name: Write value to Properties-file
+        uses: christian-draeger/write-properties@1.0.2
         with:
-          filename: "./latest_version.txt"
-          placeholder: ${{ steps.semvers.outputs.patch }}
+          path: "./latest_version.txt"
+          property: |
+            'version'
+          value: |
+            ${VERSION}
 
   # write-version3:
   #   runs-on: ubuntu-latest
   #   name: Write Version to File 3
   #   steps:
-  #     - name: Write value to Properties-file
-  #       uses: christian-draeger/write-properties@1.0.1
+  #     - uses: actions/checkout@master
+  #     - name: Update version 2
+  #       uses: brettdorrans/write-version-to-file@master
   #       with:
-  #         path: "./latest_version.properties"
-  #         property: |
-  #           'VersionP'
-  #           'VersionV'
-  #         value: |
-  #           '${VERSION}'
-  #           '${{ steps.previoustag }}'
-
-  # context:
-  #   name: Another Write Version Task
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #     - name: Get current version
-  #       uses: dolittle/write-version-to-file-action@v2
-  #       with:
-  #         version: "${VERSION}"
-  #         path: ./latest_version.txt
-  #         user-email: jbblanton@dgtech.com
-  #         user-name: jbblanton
-  #         merge-strategy: merge
+  #         filename: "./latest_version.txt"
+  #         placeholder: ${{ steps.semvers.outputs.patch }}
