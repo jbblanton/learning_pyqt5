@@ -53,7 +53,7 @@ jobs:
         uses: brettdorrans/write-version-to-file@master
         with:
           filename: "./latest_version.VERSION"
-          placeholder: "${{ generate.steps.previoustag }}"
+          placeholder: "${{ steps.previoustag }}"
 
   write-version2:
     runs-on: ubuntu-latest
