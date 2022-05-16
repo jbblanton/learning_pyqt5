@@ -53,11 +53,11 @@ jobs:
         uses: brettdorrans/write-version-to-file@master
         with:
           filename: "./latest_version.txt"
-          placeholder: ${{ steps.tag_version.outputs.new_tag }}
+          placeholder: ${VERSION}
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
-          version: ${ VERSION }
+          version: ${{ steps.tag_version.outputs.new_tag }}
           path: ./latest_version.txt
           user-email: jbblanton@dgtech.com
           user-name: jbblanton
