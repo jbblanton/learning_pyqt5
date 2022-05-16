@@ -73,10 +73,10 @@ jobs:
       - name: Write value to Properties-file
         uses: christian-draeger/write-properties@1.0.2
         with:
-          path: './latest_version.properties'
-          property:
+          path: "./latest_version.properties"
+          property: |
             'VersionP'
             'VersionV'
-          value:
+          value: |
             '${VERSION}'
             '${{ steps.previoustag }}'
