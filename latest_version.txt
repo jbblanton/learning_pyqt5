@@ -1,5 +1,5 @@
 {
   "version": "${ VERSION }",
-  "commit": "3992724c3da791ecc85c44197ef53d153b68c123",
-  "built": "2022-05-16T16:26:41.521Z"
+  "commit": "e71ae74a586f0e7b0ae0c0799524c68ecb408d98",
+  "built": "2022-05-16T16:36:46.928Z"
 }
