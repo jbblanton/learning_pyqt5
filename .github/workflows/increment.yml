@@ -69,6 +69,6 @@ jobs:
   write-version3:
     runs-on: ubuntu-latest
     name: Write Version to File 3
-      steps:
-        - name: print version
-          run: echo ${VERSION} >> ./latest_version.txt
+    steps:
+      - name: print version
+        run: echo ${VERSION} >> ./latest_version.txt
