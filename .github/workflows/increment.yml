@@ -84,7 +84,7 @@ jobs:
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
-          version: ${{ steps.context.outputs.current-version }}
+          version: ${{ steps.semvers.outputs.patch }}
           path: ./latest_version.txt
           user-email: jbblanton@dgtech.com
           user-name: jbblanton
