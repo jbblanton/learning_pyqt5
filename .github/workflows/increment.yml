@@ -65,5 +65,10 @@ jobs:
         with:
           filename: "./latest_version.txt"
           placeholder: "${VERSION}"
-        run: echo ${VERSION} >> ./latest_version.txt
-          cat ./latest_version.txt
+
+  # write-version3:
+  #   runs-on: ubuntu-latest
+  #   name: Write Version to File 2
+  #     steps:
+  #       - name: print version
+  #         run: echo ${VERSION} >> ./latest_version.txt
