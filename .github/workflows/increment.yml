@@ -44,16 +44,16 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-  write-version:
-    runs-on: ubuntu-latest
-    name: Write Version to File
-    steps:
-      - uses: actions/checkout@master
-      - name: Update version
-        uses: brettdorrans/write-version-to-file@master
-        with:
-          filename: "./latest_version.VERSION"
-          placeholder: "${{ steps.previoustag }}"
+  # write-version:
+  #   runs-on: ubuntu-latest
+  #   name: Write Version to File
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - name: Update version
+  #       uses: brettdorrans/write-version-to-file@master
+  #       with:
+  #         filename: "./latest_version.VERSION"
+  #         placeholder: "${{ steps.previoustag }}"
 
   write-version2:
     runs-on: ubuntu-latest
@@ -66,9 +66,9 @@ jobs:
           filename: "./latest_version.txt"
           placeholder: "${VERSION}"
 
-  # write-version3:
-  #   runs-on: ubuntu-latest
-  #   name: Write Version to File 2
-  #     steps:
-  #       - name: print version
-  #         run: echo ${VERSION} >> ./latest_version.txt
+  write-version3:
+    runs-on: ubuntu-latest
+    name: Write Version to File 3
+      steps:
+        - name: print version
+          run: echo ${VERSION} >> ./latest_version.txt
