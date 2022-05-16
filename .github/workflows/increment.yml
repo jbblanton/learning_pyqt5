@@ -73,16 +73,21 @@ jobs:
     steps:
       - name: Write version file
         run: |
-          echo-version: out-file -encoding utf-8 ./latest_version.txt
           echo "version = '${{ env.semver }}'" | ${{ matrix.echo-version }}
 
-  # write-version3:
-  #   runs-on: ubuntu-latest
-  #   name: Write Version to File 3
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Update version 2
-  #       uses: brettdorrans/write-version-to-file@master
-  #       with:
-  #         filename: "./latest_version.txt"
-  #         placeholder: ${{ steps.semvers.outputs.patch }}
+  context:
+    name: Another Write Version Task
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get current version
+        uses: dolittle/write-version-to-file-action@v2
+        with:
+          version: "${VERSION}"
+          path: ./latest_version.txt
+          user-email: jbblanton@dgtech.com
+          user-name: jbblanton
+          merge-strategy: merge
+          filename: "./latest_version.txt"
+          placeholder: ${{ steps.semvers.outputs.patch }}
