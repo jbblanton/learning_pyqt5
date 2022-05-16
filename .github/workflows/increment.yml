@@ -54,37 +54,10 @@ jobs:
         with:
           filename: "./latest_version.txt"
           placeholder: ${VERSION}
-
-  # write-version3:
-  #   runs-on: ubuntu-latest
-  #   name: Writing?
-  #   steps:
-  #     - name: Write value to Properties-file
-  #       uses: christian-draeger/write-properties@1.0.1
-  #       with:
-  #         path: "./latest_version.txt"
-  #         property: |
-  #           'version'
-  #         value: |
-  #           ${VERSION}
-
-  # one-more:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Write version file
-  #       run: |
-  #         echo "version = '${{ env.semver }}'" | ${{ matrix.echo-version }}
-
-  context:
-    name: Another Write Version Task
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
-          version: ${{ steps.semvers.outputs.patch }}
+          version: ${ VERSION }
           path: ./latest_version.txt
           user-email: jbblanton@dgtech.com
           user-name: jbblanton
